@@ -37,4 +37,7 @@ Para testar o código, siga os passos abaixo no VSCode:
  
 # Contato
 Abaixo estarei disponibilizando o link para o meu Linkedin, onde também irei adicionar atualizações deste projeto e que pode ser utilizado para um contato 
-[Linkedin](https://www.linkedin.com/in/lucas-pereira-0470aa227/).
+[**Linkedin**](https://www.linkedin.com/in/lucas-pereira-0470aa227/).
+
+# LICENÇA
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/elucaspereira/reserva-hotel/blob/main/LICENSE)
