@@ -7,7 +7,7 @@ class BookingService {
     findAllBookings(){
         return this.repository.findAll()
     }
-
+    //cria a reserva
     createBooking({ roomId, guestName, document, phoneNumber, checkInDate, checkOutDate }){
         const newBooking = new Booking(roomId,guestName,document,phoneNumber,checkInDate,checkOutDate)
 

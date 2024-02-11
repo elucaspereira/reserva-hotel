@@ -1,3 +1,5 @@
+//controla as rotas 
+
 class BookingController {
     constructor(service){
         this.service = service
