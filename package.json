@@ -14,6 +14,7 @@
     "bcrypt": "^5.1.1",
     "fastify": "^4.26.0",
     "jsonwebtoken": "^9.0.2",
+    "pg-promise": "^11.5.4",
     "psql": "^0.0.1",
     "uuid": "^9.0.1"
   }

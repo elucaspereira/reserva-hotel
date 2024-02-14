@@ -5,6 +5,7 @@ const BookingController = require("./bookings/BookingController")
 const AuthController = require("./auth/AuthController")
 const UserRepository = require("./auth/UserRepository")
 const AuthService = require("./auth/AuthService")
+const db = require("./database")
 
 const app = fastify({logger: true})
 
