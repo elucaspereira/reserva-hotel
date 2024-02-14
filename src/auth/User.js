@@ -1,4 +1,5 @@
 const {v4:uuidv4}= require("uuid")
+
 class User{
     constructor({id, name, userName, document, email, password}){
         this.id = id ?? uuidv4();

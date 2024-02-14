@@ -32,7 +32,7 @@ A aplicação destina-se a hotéis de pequeno porte, com a possibilidade de ampl
 Para testar o código, siga os passos abaixo no VSCode:
 1. Baixe o projeto.
 2. Instale o [Node.js](https://nodejs.org/) (versão 18.15.0 ou superior). versões anteriores podem não garantir a funcionalidade de forma correta
-3. No terminal, execute `npm run dev`.
+3. No terminal, execute `npm run start` na pasta do projeto.
 4. Utilize o Postman ou Insomnia para testar as rotas.
  
 # Contato
