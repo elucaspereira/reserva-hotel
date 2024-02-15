@@ -3,9 +3,9 @@ const BookingRepository = require("./bookings/BookingRepository")
 const BookingService = require("./bookings/BookingService")
 const BookingController = require("./bookings/BookingController")
 const AuthController = require("./auth/AuthController")
-const UserRepository = require("./auth/UserRepository")
+const UserRepository = require("./auth/UserPostgreRepository")
 const AuthService = require("./auth/AuthService")
-const db = require("./database")
+
 
 const app = fastify({logger: true})
 
@@ -17,14 +17,14 @@ const authService = new AuthService(userRepository);
 const authController = new AuthController(authService)
 
 const authenticatedRouteOption = {
-    preHandler:(request,reply,done) => {
+    preHandler: async (request,reply) => {
         const token = request.headers.authorization?.replace(/^Bearer /,"");
         if(!token) reply.code(401).send({message: "Unauthorized: token missing."});
 
-        const user = authService.verifyToken(token);
+        const user = await authService.verifyToken(token);
         if(!user) reply.code(404).send({message: "Unauthorized: invalid token."});
         request.user = user;
-        done();
+        
     }
 };
 
@@ -47,14 +47,14 @@ app.post("/api/bookings",authenticatedRouteOption,(request, reply) => {
 });
 
 // rota que registra o usuario
-app.post("/api/auth/register",(request, reply)=> {
-    const {code, body} = authController.register(request);
+app.post("/api/auth/register",async (request, reply)=> {
+    const {code, body} = await authController.register(request);
     reply.code(code).send(body);
 });
 
 // rota de login
-app.post("/api/auth/login",(request, reply)=> {
-    const {code, body} = authController.login(request);
+app.post("/api/auth/login", async (request, reply)=> {
+    const {code, body} = await authController.login(request);
     reply.code(code).send(body);
 })
 

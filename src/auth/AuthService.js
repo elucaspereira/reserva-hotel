@@ -9,18 +9,18 @@ class AuthService {
         this.repository = repository
     }
 
-    register(name, userName, email, password, document){
-        const userExists = this.repository.findByEmail(email);
+    async register(name, userName, email, password, document){
+        const userExists = await this.repository.findByEmail(email);
         if (userExists) throw new Error("This email whas already used by another user.");
 
         const newUser = new User({name, userName, email, password, document});
         newUser.password = bcrypt.hashSync(newUser.password,10);
-        this.repository.save(newUser);
+        await this.repository.save(newUser);
         return newUser;
     }
 
-    login(email, password){
-        const user = this.repository.findByEmail(email);
+    async login(email, password){
+        const user = await this.repository.findByEmail(email);
         if (!user) throw new Error("User not found.");
 
         const isSamePassword = bcrypt.compareSync(password, user.password);
@@ -31,9 +31,9 @@ class AuthService {
         user.password = undefined
         return {token, user};
     }
-    verifyToken(token){
+    async verifyToken(token){
         const decodedToken = jwt.verify(token,"apiProtection");
-        const user = this.repository.findByEmail(decodedToken.email);
+        const user = await this.repository.findByEmail(decodedToken.email);
         return user;
     }
 
