@@ -13,7 +13,7 @@ const { v4: uuidv4 } = require("uuid")
 class Booking{
     constructor({id, user, roomId, guestName, document, phoneNumber, checkInDate, checkOutDate}){
         this.id = id ?? uuidv4();
-        this.user = user;
+        this.userId = userId;
         this.roomId = roomId;
         this.guestName = guestName;
         this.document = document;

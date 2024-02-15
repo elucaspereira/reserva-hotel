@@ -14,6 +14,8 @@ CREATE TABLE IF NOT EXISTS Bookings (
     id VARCHAR(36) PRIMARY KEY,
     room_id VARCHAR(255),
     guest_name VARCHAR(255),
+    document VARCHAR(50),
+    phone_number VARCHAR(25),
     check_in_date DATE,
     check_out_date DATE,
     user_id VARCHAR(36),
