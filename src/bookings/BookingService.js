@@ -1,17 +1,18 @@
-const Booking = require("./booking")
+const Booking = require("./Booking")
 
 class BookingService {
     constructor(repository){
         this.repository = repository
     }
-    findAllBookings(){
-        return this.repository.findAll()
+    async findAllBookings(){
+        return await this.repository.findAll()
     }
     //cria a reserva
-    createBooking({userId ,roomId, guestName, document, phoneNumber, checkInDate, checkOutDate }){
-        const newBooking = new Booking({userId, roomId,guestName,document,phoneNumber,checkInDate,checkOutDate})
+    async createBooking({userId, roomId, guestName, document, phoneNumber, checkInDate, checkOutDate}){
+        const newBooking = new Booking({userId, roomId, guestName, document, phoneNumber, checkInDate, checkOutDate})
 
-        const overlappingBooking = this.repository.findAll().find((booking) => {
+        const allBookings = await this.repository.findAll()
+        const overlappingBooking = allBookings.find((booking) => {
             return(
                 booking.roomId === newBooking.roomId && 
                 booking.checkInDate < newBooking.checkOutDate &&
@@ -23,7 +24,7 @@ class BookingService {
             throw new Error("the room is already booked for the selected dates.")
         }
         
-        this.repository.create(newBooking)
+        await this.repository.create(newBooking)
         return newBooking
     }
 }

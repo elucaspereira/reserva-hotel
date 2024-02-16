@@ -1,5 +1,5 @@
 const fastify = require("fastify")
-const BookingRepository = require("./bookings/BookingRepository")
+const BookingRepository = require("./bookings/BookingPostgreRepository")
 const BookingService = require("./bookings/BookingService")
 const BookingController = require("./bookings/BookingController")
 const AuthController = require("./auth/AuthController")
@@ -34,20 +34,20 @@ app.get("/hello",(request, reply ) => {
 });
 
 //rota que busca as reservas lançadas
-app.get("/api/bookings",authenticatedRouteOption,(request, reply) => { 
-    const {code, body} = bookingController.index(request)
+app.get("/api/bookings", authenticatedRouteOption, async (request, reply) => { 
+    const {code, body} = await bookingController.index(request)
     reply.code(code).send(body)
 });
 
 
 //rota que cria as reservas
-app.post("/api/bookings",authenticatedRouteOption,(request, reply) => {
-    const { code, body } = bookingController.save(request)
+app.post("/api/bookings", authenticatedRouteOption, async (request, reply) => {
+    const { code, body } = await bookingController.save(request)
     reply.code(code).send(body)
 });
 
 // rota que registra o usuario
-app.post("/api/auth/register",async (request, reply)=> {
+app.post("/api/auth/register", async (request, reply)=> {
     const {code, body} = await authController.register(request);
     reply.code(code).send(body);
 });
