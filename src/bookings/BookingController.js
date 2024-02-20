@@ -26,7 +26,7 @@ class BookingController {
         return { code: 201, body:{ message: "Bookin crated successfully.", booking }}
     }
     async deleteBookings(request){
-        const bookingId = request.body
+        const bookingId = request.params.id;
         if(!bookingId){
             return { code:400, body:{message: "id da reserva nao informado"}};
         }
@@ -34,6 +34,7 @@ class BookingController {
             await this.service.deleteBookings(bookingId);
             return {code: 200, body:{message: "Reserva deletada com sucesso"}}
         }catch (error){
+            console.error(`Erro ao deletar reserva: ${error.message}`);
             return{code:500, body:{message:"Erro ao deletar"}}
         }
 

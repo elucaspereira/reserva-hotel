@@ -47,8 +47,8 @@ app.post("/api/bookings", authenticatedRouteOption, async (request, reply) => {
 });
 
 // rota que deleta a reserva
-app.delete("/api/bookings", authenticatedRouteOption, async (request, reply) => {
-    const bookingId = request.body.id;
+app.delete("/api/bookings/:id", authenticatedRouteOption, async (request, reply) => {
+    const bookingId = request.params.id
     const { code, body } = await bookingController.deleteBookings(request)
     reply.code(code).send(body)
 });
