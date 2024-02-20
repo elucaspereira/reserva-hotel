@@ -27,5 +27,10 @@ class BookingService {
         await this.repository.create(newBooking)
         return newBooking
     }
+    async deleteBooking(bookingId) {
+        return await this.repository.delete(bookingId)
+    }
+
+
 }
 module.exports = BookingService

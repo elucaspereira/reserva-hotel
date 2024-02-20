@@ -1,5 +1,8 @@
 //controla as rotas 
 
+const Booking = require("./Booking")
+const BookingRepository = require("./BookingPostgreRepository")
+
 class BookingController {
     constructor(service){
         this.service = service
@@ -21,6 +24,20 @@ class BookingController {
         }
         const booking = await this.service.createBooking({userId: user.id, roomId, guestName, document, phoneNumber, checkInDate, checkOutDate})
         return { code: 201, body:{ message: "Bookin crated successfully.", booking }}
+    }
+    async deleteBookings(request){
+        const bookingId = request.body
+        if(!bookingId){
+            return { code:400, body:{message: "id da reserva nao informado"}};
+        }
+        try{ 
+            await this.service.deleteBookings(bookingId);
+            return {code: 200, body:{message: "Reserva deletada com sucesso"}}
+        }catch (error){
+            return{code:500, body:{message:"Erro ao deletar"}}
+        }
+
+
     }
 }
 module.exports = BookingController

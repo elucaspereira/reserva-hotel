@@ -15,6 +15,12 @@ class BookingRepository {
     async create(booking) {
         await this.db.none("INSERT INTO Bookings (id, room_id, guest_name, document, phone_number, check_in_date, check_out_date, user_id) VALUES ( ${id}, ${roomId}, ${guestName}, ${document}, ${phoneNumber}, ${checkInDate}, ${checkOutDate}, ${userId})", booking)
     }
+
+
+    async delete(bookingId) {
+        await this.db.none("DELETE FROM Bookings WHERE id = $1", bookingId)
+
+    }
 }
 
 module.exports = BookingRepository 

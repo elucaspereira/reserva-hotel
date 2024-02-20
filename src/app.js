@@ -46,6 +46,13 @@ app.post("/api/bookings", authenticatedRouteOption, async (request, reply) => {
     reply.code(code).send(body)
 });
 
+// rota que deleta a reserva
+app.delete("/api/bookings", authenticatedRouteOption, async (request, reply) => {
+    const bookingId = request.body.id;
+    const { code, body } = await bookingController.deleteBookings(request)
+    reply.code(code).send(body)
+});
+
 // rota que registra o usuario
 app.post("/api/auth/register", async (request, reply)=> {
     const {code, body} = await authController.register(request);
